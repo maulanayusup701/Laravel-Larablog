@@ -1,14 +1,26 @@
 @extends('layouts.main')
 @section('container')
-    <article class="mt-5" id="post">
-        <h2 class="mb-5">{{ $post->title }}</h2>
-        <h5>by: <a href="/authors/{{ $post->author->username }}"
-                style="text-decoration:
-            none;">{{ $post->author->name }}</a> in <a
-                href="/categories/{{ $post->category->slug }}"
-                style="text-decoration:
-                none;">{{ $post->category->name }}</a></h5>
-        {!! $post->content !!}
-    </article>
-    <a href="/posts"><button class="btn btn-primary mb-4"> Back to Posts</button></a>
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <h1 class="mb-3">{{ $post->title }}</h1>
+
+                <p>by, <a
+                        href="/authors/{{ $post->author->username }}"style="text-decoration:none;">{{ $post->author->name }}</a>
+                    in <a href="/categories/{{ $post->category->slug }}"
+                        style="text-decoration:none;">{{ $post->category->name }}</a>
+                    {{ $post->created_at->diffForHumans() }}
+                </p>
+
+                <img src="https://source.unsplash.com/random/1200x400?{{ $post->category->name }}" style="widht:1200x400"
+                    class="card-img-top" alt="{{ $post->category->name }}">
+
+                <article class="my-3 fs-5">
+                    {!! $post->content !!}
+                </article>
+
+                <a href="/posts" class="d-block mt-3">Back to post</a>
+            </div>
+        </div>
+    </div>
 @endsection

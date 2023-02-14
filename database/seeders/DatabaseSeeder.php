@@ -59,12 +59,16 @@ class DatabaseSeeder extends Seeder
 
 
         Category::create([
-            'name' => 'Programing',
-            'slug' => 'programing',
+            'name' => 'Web Programming',
+            'slug' => 'web-programming',
         ]);
         Category::create([
-            'name' => 'Nihongo',
-            'slug' => 'nihongo',
+            'name' => 'Web Design',
+            'slug' => 'web-design',
+        ]);
+        Category::create([
+            'name' => 'Nihon',
+            'slug' => 'nihon    ',
         ]);
     }
 }
