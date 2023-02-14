@@ -16,15 +16,15 @@ class PostController extends Controller
 
     public function index(){
         return view('posts', [
-            'title' =>'Posts',
-            'posts' => Post::latest()->get()
+            'title' =>'All Posts',
+            'posts' => Post::with(['category','author'])->latest()->get()
             ]
     );
     }
 
     public function show(Post $post){
         return view('post',[
-            "title" => "single Post",
+            "title" => $post->title,
             "post" => $post
         ]);
     }

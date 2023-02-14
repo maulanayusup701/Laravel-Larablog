@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('container')
-    <h1>Halaman Post</h1>
+    <h1>{{ $title }}</h1>
     <hr>
     @foreach ($posts as $post)
         <article class="mt-2" id='post'>
