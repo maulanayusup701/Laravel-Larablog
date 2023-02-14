@@ -18,38 +18,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        User::create([
-            'name' => 'Maulana Yusup',
-            'email' => 'maulana.yusup8989@gmail.com',
-            'password' => bcrypt('12345')
-        ]);
+        User::factory(3)->create();
+        // User::create([
+        //     'name' => 'Maulana Yusup',
+        //     'email' => 'maulana.yusup8989@gmail.com',
+        //     'password' => bcrypt('12345')
+        // ]);
 
+        // User::create([
+        //     'name' => 'Yana',
+        //     'email' => 'aoifutaba701@gmai.com',
+        //     'password' => bcrypt('12345')
+        // ]);
 
-        Post::create([
-            'title' => 'test1',
-            'slug' => 'Test1',
-            'excerpt' => 'lorem ipsum dolor sit amet.',
-            'content' => 'lorem ipsum dolor sit amet.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-        Post::create([
-            'title' => 'test2',
-            'slug' => 'Test2',
-            'excerpt' => 'lorem ipsum dolor sit amet.',
-            'content' => 'lorem ipsum dolor sit amet.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-        Post::create([
-            'title' => 'test3',
-            'slug' => 'Test3',
-            'excerpt' => 'lorem ipsum dolor sit amet.',
-            'content' => 'lorem ipsum dolor sit amet.',
-            'category_id' => 2,
-            'user_id' => 1
-        ]);
+        Post::factory(20)->create();
+        // Post::create([
+        //     'title' => 'test1',
+        //     'slug' => 'Test1',
+        //     'excerpt' => 'lorem ipsum dolor sit amet.',
+        //     'content' => 'lorem ipsum dolor sit amet.',
+        //     'category_id' => 1,
+        //     'user_id' => 1
+        // ]);
+        // Post::create([
+        //     'title' => 'test2',
+        //     'slug' => 'Test2',
+        //     'excerpt' => 'lorem ipsum dolor sit amet.',
+        //     'content' => 'lorem ipsum dolor sit amet.',
+        //     'category_id' => 1,
+        //     'user_id' => 1
+        // ]);
+        // Post::create([
+        //     'title' => 'test3',
+        //     'slug' => 'Test3',
+        //     'excerpt' => 'lorem ipsum dolor sit amet.',
+        //     'content' => 'lorem ipsum dolor sit amet.',
+        //     'category_id' => 2,
+        //     'user_id' => 2
+        // ]);
 
 
         Category::create([

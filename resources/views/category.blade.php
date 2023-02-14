@@ -10,12 +10,16 @@
                         <a href="/posts/{{ $post->slug }}"style="text-decoration: none;">{{ $post->title }}</a>
                     </h3>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        by, Maulana Yusup in
-                        <a
-                            href="/categories/{{ $post->category->slug }}"style="text-decoration: none;">{{ $post->category->name }}</a>
-                    </h6>
-                    <p class="card-text"> {!! $post->excerpt !!}</p>
-                    <a href="/posts/{{ $post->slug }}"style="text-decoration: none;">Read more...</a>
+                        <h5>by: <a href="/authors/{{ $post->author->username }}"
+                                style="text-decoration:
+                    none;">{{ $post->author->name }}</a> in <a
+                                href="/categories/{{ $post->category->slug }}"
+                                style="text-decoration:
+                        none;">{{ $post->category->name }}</a>
+                        </h5>
+
+                        <p class="card-text"> {!! $post->excerpt !!}</p>
+                        <a href="/posts/{{ $post->slug }}"style="text-decoration: none;">Read more...</a>
                 </div>
             </div>
         </article>
