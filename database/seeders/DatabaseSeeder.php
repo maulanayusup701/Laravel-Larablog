@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Category::create([
             'name' => 'Nihon',
-            'slug' => 'nihon    ',
+            'slug' => 'nihon',
         ]);
     }
 }

@@ -41,7 +41,7 @@ Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Categories',
         'active' => 'categories',
-        'categories' => Category::all()
+        'categories' => Category::orderBy('name', 'asc')->get()
     ]);
 });
 
