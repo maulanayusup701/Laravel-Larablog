@@ -1,10 +1,10 @@
 <?php
-
-use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\authController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +60,13 @@ Route::get('/authors/{author:username}', function (User $author) {
         'posts' => $author->posts->load('category', 'author'),
     ]);
 });
+
+//Authentication
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'loginAuth']);
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'registerStore']);
+Route::post('/logout', [AuthController::class, 'logout']);
+
+//Authentication Route
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
