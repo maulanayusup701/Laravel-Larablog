@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use DeepCopy\Filter\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +30,6 @@ class Post extends Model
                 $query->where('slug', $category);
             });
         });
-
 
         $query->when(
             $filters['author'] ?? false,
