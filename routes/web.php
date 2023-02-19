@@ -4,7 +4,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\DashboardPostsController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -71,4 +71,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 //Authentication Route
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboardPost', [DashboardPostController::class, 'index'])->middleware('auth');
+
+
+Route::get('/dashboard/posts/checkSlug',[DashboardPostsController::class,'checkSlug'])->middleware('auth');
+Route::resource('/dashboard/posts',DashboardPostsController::class)->middleware('auth');

@@ -22,8 +22,8 @@
     </div>
     @if ($posts->count() > 0)
         <div class="card mb-3">
-            <img src="https://source.unsplash.com/random/1200x400?{{ $posts[0]->category->name[0] }}" style="widht:1200x400"
-                class="card-img-top" alt="{{ $posts[0]->category->name[0] }}">
+            <img src="https://source.unsplash.com/random/1200x400?{{ $posts[0]->category->name }}" style="widht:1200x400"
+                class="card-img-top" alt="{{ $posts[0]->category->name }}">
             <div class="card-body text-center">
                 <a href="/posts/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">
                     <h3 class="card-title">{{ $posts[0]->title }}</h3>

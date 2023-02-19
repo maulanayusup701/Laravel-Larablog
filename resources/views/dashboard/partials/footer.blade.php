@@ -1,9 +1,7 @@
 </div>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/app.js"></script>
-
-<!-- Need: Apexcharts -->
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

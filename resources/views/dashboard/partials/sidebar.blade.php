@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="/dashboard"><img src="images/logo/logo.svg" alt="Logo" srcset="" /></a>
+                    <a href="/dashboard"><img src="{{ asset('images/logo/logo.svg') }}" alt="Logo" srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -49,8 +49,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('dashboardPost') ? 'active' : '' }}">
-                    <a href="/dashboardPost" class="sidebar-link">
+                <li class="sidebar-item {{ Request::is('dashboard/posts') ? 'active' : '' }}">
+                    <a href="/dashboard/posts" class="sidebar-link">
                         <i class="bi bi-file-earmark-text-fill"></i>
                         <span>Posts</span>
                     </a>

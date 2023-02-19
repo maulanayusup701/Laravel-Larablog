@@ -1,8 +1,9 @@
 @include('dashboard.partials.meta')
 
 <body>
-    <script src="js/initTheme.js"></script>
+    <script src="{{ asset('js/initTheme.js') }}"></script>
     <div id="app">
+
         @include('dashboard.partials.sidebar')
 
         {{-- content --}}
