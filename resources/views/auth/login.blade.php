@@ -52,7 +52,7 @@
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input type="text" name="username" id="username"
                             class="form-control form-control-xl @error('username') is-invalid @enderror"
-                            placeholder="Username" required>
+                            placeholder="Username" required autofocus>
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>

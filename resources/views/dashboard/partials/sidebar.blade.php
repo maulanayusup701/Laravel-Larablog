@@ -41,28 +41,22 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
-
-                <li class="sidebar-item {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <a href="/dashboard" class="sidebar-link">
-                        <i class="bi bi-house-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+                <div class="d-grid gap-2">
+                    <a href="/dashboard/posts/create" class="btn btn-outline-success sidebar-item">Add Post</a>
+                </div>
+                <hr>
                 <li class="sidebar-item {{ Request::is('dashboard/posts') ? 'active' : '' }}">
                     <a href="/dashboard/posts" class="sidebar-link">
                         <i class="bi bi-file-earmark-text-fill"></i>
                         <span>Posts</span>
                     </a>
                 </li>
-            </ul>
-            <ul class="menu">
-                <hr>
                 <li class="sidebar-item {{ Request::is('posts') ? 'active' : '' }}">
                     <a href="/posts" class="sidebar-link">
                         <i class="bi bi-arrow-up-right-square-fill"></i>
                         <span>Visit Website</span>
                     </a>
+                    <hr>
                     <form action="/logout" method="post">
                         @csrf
                         <div class="d-grid gap-2">

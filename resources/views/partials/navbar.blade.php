@@ -18,7 +18,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Wellcome Back! {{ auth()->user()->username }}
+                            Wellcome Back! {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i>

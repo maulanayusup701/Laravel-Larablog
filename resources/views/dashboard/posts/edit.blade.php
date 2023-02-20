@@ -6,13 +6,14 @@
         </a>
     </header>
     <h3 class="mt-4 mb-5">
-        Larablog | Create Post
+        Larablog | Edit Post
     </h3>
     <div class="col-12">
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form form-horizontal" action="/dashboard/posts" method="post">
+                    <form class="form form-horizontal" action="/dashboard/posts/{{ $post->slug }}" method="post">
+                        @method('put')
                         @csrf
                         <div class="form-body">
                             <div class="row">
@@ -22,12 +23,12 @@
                                 <div class="col-md-12 form-group">
                                     <input type="text" id="title"
                                         class="form-control @error('title') is-invalid @enderror" name="title"
-                                        placeholder="Title" value="{{ old('title') }}">
-                                </div>
-                                <div class="invalid-feedback">
-                                    @error('title')
-                                        {{ $message }}
-                                    @enderror
+                                        placeholder="Title" value="{{ old('title', $post->title) }}">
+                                    <div class="invalid-feedback">
+                                        @error('title')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label>Slug</label>
@@ -35,7 +36,7 @@
                                 <div class="col-md-12 form-group">
                                     <input type="text" id="slug"
                                         class="form-control @error('slug') is-invalid @enderror" name="slug"
-                                        placeholder="slug">
+                                        placeholder="slug" value="{{ old('slug', $post->slug) }}">
                                     <div class="invalid-feedback">
                                         @error('slug')
                                             {{ $message }}
@@ -49,7 +50,7 @@
                                     <select class="form-select @error('category_id') is-invalid @enderror"
                                         name="category_id" id="category_id" value="{{ old('category_id') }}">
                                         @foreach ($categories as $category)
-                                            @if (old('category_id') == $category->category_id)
+                                            @if (old('category_id', $post->category_id) == $post->category_id)
                                                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                             @else
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -66,8 +67,10 @@
                                     <label>Body</label>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input id="content" type="hidden" name="content" value="{{ old('content') }}">
-                                    <trix-editor input="content" value="{{ old('content') }}"></trix-editor>
+                                    <input id="content" type="hidden" name="content"
+                                        value="{{ old('content', $post->content) }}">
+                                    <trix-editor input="content" value="{{ old('content', $post->content) }}">
+                                    </trix-editor>
                                     <div class="invalid-feedback">
                                         @error('content')
                                             {{ $message }}
@@ -76,7 +79,7 @@
                                 </div>
                                 <div class="col-sm-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">
-                                        Create Post
+                                        Update Post
                                     </button>
                                 </div>
                             </div>
@@ -86,6 +89,7 @@
             </div>
         </div>
     </div>
+
     <script>
         const title = document.querySelector("#title");
         const slug = document.querySelector("#slug");

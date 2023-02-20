@@ -2,104 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;    
+use App\Models\Post;
 use Illuminate\Support\Str;
-use App\Models\Category;    
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class DashboardPostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('dashboard.posts.posts',[
+        return view('dashboard.posts.posts', [
             'title' => 'My Post',
-            'post' => Post::latest()->where('user_id', auth()->user()->id)->get()   
+            'post' => Post::latest()->where('user_id', auth()->user()->id)->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('dashboard.posts.create',[
+        return view('dashboard.posts.create', [
             'title' => 'Create Post',
-            'categories' => Category::orderBy('name','asc')->get()
+            'categories' => Category::orderBy('name', 'asc')->get()
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|max:30',
+            'title' => 'required|max:200',
             'slug' => 'required|unique:posts',
-            'category_id' => 'required|max:1',
+            'category_id' => 'required',
             'content' => 'required',
         ]);
         $data['user_id'] = auth()->user()->id;
-        $data['excerpt'] = Str::limit(strip_tags($request->body),200);
-        $data = Post::create($data); 
+        $data['excerpt'] = Str::limit(strip_tags($request->content), 200);
+        $data = Post::create($data);
         return redirect('/dashboard/posts')->with('success', 'create post successfuly');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
-        return view('dashboard.posts.show',[
+        return view('dashboard.posts.show', [
             'title' => $post->title,
             'post' => $post
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
-        //
+        return view('dashboard/posts/edit', [
+            'title' => 'Edit Post',
+            'post' => $post,
+            'categories' => Category::orderBy('name', 'asc')->get()
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
-        //
+        $rules = [
+            'title' => 'required|max:200',
+            'category_id' => 'required',
+            'content' => 'required',
+        ];
+        if ($request != $post->slug) {
+            $rules['slug'] = 'required|unique:posts';
+        }
+
+        $data = $request->validate($rules);
+        $data['user_id'] = auth()->user()->id;
+        $data['excerpt'] = Str::limit(strip_tags($request->content), 200);
+        Post::where('id', $post->id)->update($data);
+        return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Post $post)
     {
-        //
+        $data = Post::destroy($post->id);
+        return redirect('/dashboard/posts')->with('success', 'Post has been deleted!');
     }
 }
