@@ -17,36 +17,41 @@
                 </div>
             @endif
 
-            @foreach ($post as $post)
-                <div class="card mb-3">
-                    <div class="row">
-                        {{-- <div class="col-1">
-                            <img src="https://source.unsplash.com/random/195x140?{{ $post->category->name }}">
-                        </div> --}}
-                        <div class="col">
-                            <div class="card-body">
-                                <a href="/posts/{{ $post->slug }}">
-                                    <h3 class="card-title">{{ $post->title }}</h3>
-                                </a>
-                                <p class="card-text">{{ $post->excerpt }}{{ $post->created_at->diffForHumans() }}
-                                    <span class="badge bg-primary">{{ $post->category->name }}</span>
-                                </p>
-                                <div>
-                                    <a href="/dashboard/posts/{{ $post->slug }}/edit"><span class="badge bg-warning"><i
-                                                class="bi bi-pencil-square"></i></span></a>
-                                    <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')">
-                                            <i class="bi bi-x-octagon-fill"></i></span>
-                                        </button>
-                                    </form>
+            @if ($post->count() > 0)
+                @foreach ($post as $post)
+                    <div class="card mb-3">
+                        <div class="row">
+                            {{-- <div class="col-1">
+                <img src="https://source.unsplash.com/random/195x140?{{ $post->category->name }}">
+            </div> --}}
+                            <div class="col">
+                                <div class="card-body">
+                                    <a href="/posts/{{ $post->slug }}">
+                                        <h3 class="card-title">{{ $post->title }}</h3>
+                                    </a>
+                                    <p class="card-text">{{ $post->excerpt }}{{ $post->created_at->diffForHumans() }}
+                                        <span class="badge bg-primary">{{ $post->category->name }}</span>
+                                    </p>
+                                    <div>
+                                        <a href="/dashboard/posts/{{ $post->slug }}/edit"><span
+                                                class="badge bg-warning"><i class="bi bi-pencil-square"></i></span></a>
+                                        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="badge bg-danger border-0"
+                                                onclick="return confirm('Are you sure?')">
+                                                <i class="bi bi-x-octagon-fill"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @else
+                <p class="text-center fs-4">No post found.</p>
+            @endif
         </div>
     </div>
 @endsection

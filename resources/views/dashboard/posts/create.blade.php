@@ -12,7 +12,8 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form form-horizontal" action="/dashboard/posts" method="post">
+                    <form class="form form-horizontal" action="/dashboard/posts" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-body">
                             <div class="row">
@@ -38,6 +39,16 @@
                                         placeholder="slug">
                                     <div class="invalid-feedback">
                                         @error('slug')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Post Image</label>
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                        id="image" name="image">
+                                    <div class="invalid-feedback">
+                                        @error('image')
                                             {{ $message }}
                                         @enderror
                                     </div>

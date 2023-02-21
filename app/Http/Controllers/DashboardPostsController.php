@@ -30,9 +30,15 @@ class DashboardPostsController extends Controller
         $data = $request->validate([
             'title' => 'required|max:200',
             'slug' => 'required|unique:posts',
+            'image' => 'image|file|max:1024',
             'category_id' => 'required',
             'content' => 'required',
         ]);
+
+        if ($request->file('image')) {
+            $data['image'] = $request->file('image')->store('post-images');
+        }
+
         $data['user_id'] = auth()->user()->id;
         $data['excerpt'] = Str::limit(strip_tags($request->content), 200);
         $data = Post::create($data);
@@ -64,14 +70,14 @@ class DashboardPostsController extends Controller
             'content' => 'required',
         ];
         if ($request != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
+            $rules['slug'] =  'required';
         }
 
         $data = $request->validate($rules);
         $data['user_id'] = auth()->user()->id;
         $data['excerpt'] = Str::limit(strip_tags($request->content), 200);
-        Post::where('id', $post->id)->update($data);
-        return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
+        // Post::where('id', $post->id)->update($data);
+        // return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
     }
 
     public function destroy(Post $post)

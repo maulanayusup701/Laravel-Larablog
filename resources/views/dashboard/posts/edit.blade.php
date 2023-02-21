@@ -12,7 +12,8 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form form-horizontal" action="/dashboard/posts/{{ $post->slug }}" method="post">
+                    <form class="form form-horizontal" action="/dashboard/posts/{{ $post->slug }}" method="post"
+                        enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <div class="form-body">
@@ -42,6 +43,12 @@
                                             {{ $message }}
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Post Image</label>
+                                    <img class="img-preview img-fluids">
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                        id="image" name="image" onchange="previewImage()">
                                 </div>
                                 <div class="col-md-12">
                                     <label>Category</label>
@@ -102,5 +109,19 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+
+        function previewImage() => {
+            const img = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview')
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FilleReader();
+            oFReader.readAsDataURL(image.filesp[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.scr = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection
