@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -67,17 +68,26 @@ class DashboardPostsController extends Controller
         $rules = [
             'title' => 'required|max:200',
             'category_id' => 'required',
+            'image' => 'image|file|max:1024',
             'content' => 'required',
         ];
-        if ($request != $post->slug) {
+
+        if ($request->slug != $post->slug) {
             $rules['slug'] =  'required';
+        }
+
+        if ($request->file('image')) {
+            if ($request->image) {
+                Storage::delete($request->oldImage);
+            }
+            $data['image'] = $request->file('image')->store('post-images');
         }
 
         $data = $request->validate($rules);
         $data['user_id'] = auth()->user()->id;
         $data['excerpt'] = Str::limit(strip_tags($request->content), 200);
-        // Post::where('id', $post->id)->update($data);
-        // return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
+        Post::where('id', $post->id)->update($data);
+        return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
     }
 
     public function destroy(Post $post)

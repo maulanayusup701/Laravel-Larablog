@@ -46,9 +46,21 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Post Image</label>
-                                    <img class="img-preview img-fluids">
+                                    <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                                    @if ($post->image)
+                                        <div>
+                                            <img src="{{ asset('storage/' . $post->image) }}"
+                                                class="img-preview img-fluid mb-3" id="frame" name="name"
+                                                style="max-height: 500px; overflow:hidden" />
+                                        </div>
+                                    @else
+                                        <div>
+                                            <img src="" class="img-preview img-fluid mb-3" id="frame"
+                                                name="name" style="max-height: 500px; overflow:hidden">
+                                        </div>
+                                    @endif
                                     <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                        id="image" name="image" onchange="previewImage()">
+                                        id="image" name="image" onchange="preview()">
                                 </div>
                                 <div class="col-md-12">
                                     <label>Category</label>
@@ -110,18 +122,8 @@
             e.preventDefault();
         })
 
-        function previewImage() => {
-            const img = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview')
-
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FilleReader();
-            oFReader.readAsDataURL(image.filesp[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.scr = oFREvent.target.result;
-            }
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
 @endsection

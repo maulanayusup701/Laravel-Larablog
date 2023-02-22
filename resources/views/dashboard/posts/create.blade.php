@@ -45,8 +45,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Post Image</label>
+                                    <div>
+                                        <img src="" class="img-preview img-fluid mb-3" id="frame"
+                                            style="max-height: 500px; overflow:hidden">
+                                    </div>
                                     <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                        id="image" name="image">
+                                        id="image" name="image" onchange="preview()">
                                     <div class="invalid-feedback">
                                         @error('image')
                                             {{ $message }}
@@ -109,5 +113,9 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 @endsection
