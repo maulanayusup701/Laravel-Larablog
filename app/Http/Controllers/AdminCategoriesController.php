@@ -28,7 +28,9 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.categories.createCategory', [
+            'title' => 'Add Category',
+        ]);
     }
 
     /**
@@ -39,7 +41,17 @@ class AdminCategoriesController extends Controller
      */
     public function store(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required|max:200',
+        ];
+
+        if ($request->slug != $category->slug) {
+            $rules['slug'] = 'require|unique:categories';
+        }
+
+        $data = $request->validate($rules);
+        $data = Category::create($data);
+        return redirect('dashboard/categories')->with('succcess', 'Creat category Successfuly!');
     }
 
     /**
@@ -61,7 +73,10 @@ class AdminCategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.admin.categories.editCategory', [
+            'title' => 'Edit Category',
+            'category' => $category
+        ]);
     }
 
     /**
@@ -73,7 +88,15 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $roles = [
+            'name' => 'required|max:200',
+        ];
+        if ($request->slug !== $category->slug) {
+            $roles['slug'] = 'required|unique:categories';
+        }
+        $data = $request->validate($roles);
+        $data = Category::where('id', $category->id)->update($data);
+        return redirect('/dashboard/categories')->with('success', 'Category has been updated!');
     }
 
     /**

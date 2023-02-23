@@ -56,7 +56,7 @@ class DashboardPostsController extends Controller
 
     public function edit(Post $post)
     {
-        return view('dashboard/posts/edit', [
+        return view('/dashboard/posts/edit', [
             'title' => 'Edit Post',
             'post' => $post,
             'categories' => Category::orderBy('name', 'asc')->get()

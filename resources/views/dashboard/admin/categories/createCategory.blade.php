@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form form-horizontal" action="/dashboard/category/create" method="post">
+                    <form class="form form-horizontal" action="/dashboard/categories/" method="post">
                         @csrf
                         <div class="form-body">
                             <div class="row">

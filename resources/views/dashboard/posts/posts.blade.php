@@ -22,8 +22,8 @@
                     <div class="card mb-3">
                         <div class="row">
                             {{-- <div class="col-1">
-                <img src="https://source.unsplash.com/random/195x140?{{ $post->category->name }}">
-            </div> --}}
+                                <img src="https://source.unsplash.com/random/195x140?{{ $post->category->name }}">
+                            </div> --}}
                             <div class="col">
                                 <div class="card-body">
                                     <a href="/posts/{{ $post->slug }}">
