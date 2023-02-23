@@ -1,11 +1,13 @@
 <?php
+
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardPostsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostsController;
+use App\Http\Controllers\AdminCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +48,6 @@ Route::get('/categories', function () {
     ]);
 });
 
-// Route::get('/categories/{category:slug}', function (Category $category) {
-//     return view('posts', [
-//         'title' => "Posts By Category : $category->name",
-//         'active' => 'categories',
-//         'posts' => $category->posts->load('category', 'author'),
-//     ]);
-// });
-
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
         'title' => "Posts By Author :$author->name",
@@ -71,7 +65,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 //Authentication Route
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-
-
-Route::get('/dashboard/posts/checkSlug',[DashboardPostsController::class,'checkSlug'])->middleware('auth');
-Route::resource('/dashboard/posts',DashboardPostsController::class)->middleware('auth');
+Route::get('/dashboard/posts/checkSlug', [DashboardPostsController::class, 'checkSlug'])->middleware('auth');
+Route::resource('/dashboard/posts', DashboardPostsController::class)->middleware('auth');
+Route::resource('/dashboard/categories', AdminCategoriesController::class)->except('show')->middleware('isAdmin');

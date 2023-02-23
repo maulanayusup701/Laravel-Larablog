@@ -56,7 +56,22 @@
                         <i class="bi bi-arrow-up-right-square-fill"></i>
                         <span>Visit Website</span>
                     </a>
+                </li>
+            </ul>
+            @can('isAdmin')
+                <ul class="menu">
+                    <li class="sidebar-title mt-4">Administrator</li>
                     <hr>
+                    <li class="sidebar-item {{ Request::is('dashboard/categories') ? 'active' : '' }}">
+                        <a href="/dashboard/categories" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Post Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            @endcan
+            <ul class="menu">
+                <li class="sidebar-item">
                     <form action="/logout" method="post">
                         @csrf
                         <div class="d-grid gap-2">
